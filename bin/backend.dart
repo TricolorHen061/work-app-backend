@@ -14,6 +14,7 @@ void main() async {
 }
 
 Future<Response> handleRequest(Request requestData) async {
+  print("Received connection");
   final workAppColl = db.collection("work_app");
   if (requestData.method == "POST") {
     final incomeData = jsonDecode(await requestData.readAsString());
@@ -37,7 +38,8 @@ Future<Response> handleRequest(Request requestData) async {
 
       return Future.value(Response.ok("Submitted"));
     } else if (incomeData["type"] == "view") {
-      print("Somebody that used the email ${incomeData['email']} viewed their past requests");
+      print(
+          "Somebody that used the email ${incomeData['email']} viewed their past requests");
       {
         final results =
             (await workAppColl.find({"_id": incomeData["email"]}).toList())

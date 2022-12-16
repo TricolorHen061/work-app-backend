@@ -8,7 +8,7 @@ void main() async {
   await db.open();
   final handler =
       Pipeline().addMiddleware(logRequests()).addHandler(handleRequest);
-  await shelf_io.serve(handler, "192.168.1.16", 8080);
+  await shelf_io.serve(handler, "localhost", 8080);
 
   print("Running server");
 }
